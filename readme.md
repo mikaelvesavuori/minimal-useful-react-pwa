@@ -8,6 +8,8 @@ Then this is your answer. Goes straight for standardized, common and fairly vani
 
 This is adapted from the in-house boilerplate we use at [Humblebee](https://www.humblebee.se). Feel free to get in touch if you like what we do!
 
+![Google Chrome: Lighthouse ratings on Netlify with "Applied Fast 3G"](/lighthouse.png 'Google Chrome: Lighthouse ratings on Netlify with "Applied Fast 3G"')
+
 ## Features
 
 - Complete Progressive Web App experience: Installable, splash screens on load, Service Worker caching with automatic checks for updates...
@@ -45,7 +47,7 @@ This is adapted from the in-house boilerplate we use at [Humblebee](https://www.
 ## Building
 
 - Run `yarn build` or `npm run build`
-- NOTE: I am using the `cp` command from Mac/Linux, so you may need to replace the copying of \_headers and \_redirects somehow, on a non-Bash Windows setup (the files should normally be copied with the CopyWebpackPlugin, but this breaks the Service Worker!)
+- NOTE: I am using the `cp` command from Mac/Linux, so you may need to replace the copying of _\_headers_ and _\_redirects_ somehow, on a non-Bash Windows setup (the files should normally be copied with the CopyWebpackPlugin, but this breaks the Service Worker!)
 
 ## So, what doesn't it have?
 
