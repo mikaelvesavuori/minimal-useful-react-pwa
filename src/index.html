@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en-US">
+	<head>
+		<meta charset="utf-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1, maximum-scale=5, shrink-to-fit=no, user-scalable=yes"
+		/>
+		<title>Demo site</title>
+
+		<!-- Manifest data -->
+		<link rel="manifest" href="/manifest.webmanifest" type="application/manifest+json" />
+		<!-- Legacy fallback -->
+		<meta name="application-name" content="App" />
+		<meta name="theme-color" content="#ffffff" />
+		<meta name="description" content="Demo site" />
+
+		<!-- OpenGraph/Facebook metadata -->
+		<meta property="og:url" content="" />
+		<meta property="og:site_name" content="" />
+		<meta property="og:title" content="" />
+		<meta property="og:description" content="" />
+		<meta property="og:image:secure_url" content="" />
+
+		<!-- Standalone mode -->
+		<meta name="mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+		<meta name="apple-mobile-web-app-title" content="Demo site" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<!-- iPhone X (1125px x 2436px) -->
+		<link
+			rel="apple-touch-startup-image"
+			media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3)"
+			href="/assets/splash/splash_1125.jpg"
+		/>
+		<!-- iPhone 8, 7, 6s, 6 (750px x 1334px) -->
+		<link
+			rel="apple-touch-startup-image"
+			media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)"
+			href="/assets/splash/splash_750.jpg"
+		/>
+		<!-- iPhone 8 Plus, 7 Plus, 6s Plus, 6 Plus (1242px x 2208px) -->
+		<link
+			rel="apple-touch-startup-image"
+			media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3)"
+			href="/assets/splash/splash_1242.jpg"
+		/>
+		<!-- iPhone 5 (640px x 1136px) -->
+		<link
+			rel="apple-touch-startup-image"
+			media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)"
+			href="/assets/splash/splash_640.jpg"
+		/>
+		<!-- iPad Mini, Air (1536px x 2048px) -->
+		<link
+			rel="apple-touch-startup-image"
+			media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2)"
+			href="/assets/splash/splash_1536.jpg"
+		/>
+		<!-- iPad Pro 10.5" (1668px x 2224px) -->
+		<link
+			rel="apple-touch-startup-image"
+			media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2)"
+			href="/assets/splash/splash_1668.jpg"
+		/>
+		<!-- iPad Pro 12.9" (2048px x 2732px) -->
+		<link
+			rel="apple-touch-startup-image"
+			media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2)"
+			href="/assets/splash/splash_2048.jpg"
+		/>
+
+		<!-- Favicons -->
+		<link rel="icon" type="image/png" sizes="512x512" href="/assets/icons/icon-512x512.png" />
+		<link rel="icon" type="image/png" sizes="384x384" href="/assets/icons/icon-384x384.png" />
+		<link rel="icon" type="image/png" sizes="192x192" href="/assets/icons/icon-192x192.png" />
+		<link rel="icon" type="image/png" sizes="152x152" href="/assets/icons/icon-152x152.png" />
+		<link rel="icon" type="image/png" sizes="144x144" href="/assets/icons/icon-144x144.png" />
+		<link rel="icon" type="image/png" sizes="128x128" href="/assets/icons/icon-128x128.png" />
+		<link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/icon-96x96.png" />
+		<link rel="icon" type="image/png" sizes="72x72" href="/assets/icons/icon-72x72.png" />
+		<link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-touch-icon.png" />
+		<link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png" />
+		<link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png" />
+		<link rel="mask-icon" href="/assets/icons/safari-pinned-tab.svg" color="#1A1A1A" />
+		<meta name="msapplication-TileColor" content="#1A1A1A" />
+	</head>
+
+	<body>
+		<div id="root"></div>
+
+		<!-- Check for Service Worker/PWA updates -->
+		<script>
+			let newWorker;
+
+			if ('serviceWorker' in navigator) {
+				window.addEventListener('load', () => {
+					navigator.serviceWorker
+						.register('/sw.js')
+						.then(registration => {
+							console.log('Service Worker registered: ', registration);
+							// registration.pushManager.subscribe({ userVisibleOnly: true });
+
+							registration.addEventListener('updatefound', () => {
+								console.log('Update found');
+								newWorker = registration.installing;
+
+								newWorker.addEventListener('statechange', () => {
+									console.log('State change', newWorker.state);
+									switch (newWorker.state) {
+										case 'installed':
+											if (navigator.serviceWorker.controller) {
+												console.log('Installed');
+												showUpdateBar();
+											}
+											break;
+									}
+								});
+							});
+						})
+						.catch(registrationError => {
+							console.warn('Error registering SW!', registrationError);
+						});
+				});
+
+				let refreshing;
+				navigator.serviceWorker.addEventListener('controllerchange', function() {
+					if (refreshing) return;
+					window.location.reload();
+					refreshing = true;
+				});
+			}
+		</script>
+
+		<!-- Always specify some kind of noscript conditions, best case scenario would be a working site without any bells-and-whistles -->
+		<noscript>
+			Seems JavaScript is not enabled. Please consider
+			<a href="https://enable-javascript.com">turning on Javascript</a>.
+		</noscript>
+	</body>
+</html>

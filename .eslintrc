@@ -1,0 +1,30 @@
+{
+	"extends": ["eslint:recommended", "plugin:react/recommended", "google", "prettier"],
+	"plugins": ["styled-components-config"],
+	"settings": {
+		"import/resolver": {
+			"node": {
+				"paths": ["src", "", "./"]
+			}
+		}
+	},
+	"rules": {
+		"react/jsx-one-expression-per-line": 0,
+		"react/jsx-closing-tag-location": 0,
+		"react/no-did-mount-set-state": 0,
+		"jsx-a11y/anchor-is-valid": 0,
+		"jsx-a11y/label-has-for": 0,
+		"prefer-destructuring": 0,
+		"react/destructuring-assignment": 0,
+		"react/no-access-state-in-setstate": 0,
+		"func-names": ["error", "never"],
+		"react/forbid-prop-types": {
+			"forbid": ["any"]
+		}
+	},
+	"env": {
+		"node": true,
+		"browser": true
+	},
+	"parser": "babel-eslint"
+}
