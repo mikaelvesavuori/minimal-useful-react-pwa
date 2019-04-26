@@ -10,11 +10,13 @@ This is adapted from the in-house boilerplate we use at [Humblebee](https://www.
 
 ![Google Chrome: Lighthouse ratings on Netlify with "Applied Fast 3G"](/lighthouse.png 'Google Chrome: Lighthouse ratings on Netlify with "Applied Fast 3G"')
 
+NOTE: There is an unfortunate minor point deduction on Best practices because of Lighthouse's HTTP2 bug. This should be 100.
+
 ## Features
 
 - Complete Progressive Web App experience: Installable, splash screens on load, Service Worker caching with automatic checks for updates...
 - Uses babel-preset-env and browserslist to target more modern browers, cutting down bundle size a lot
-- 100% Lighthouse scores (minus a few points on Netlify, because of Lighthouse's HTTP2 bug)
+- 100% Lighthouse scores (minus a few points on Best practices because of Lighthouse's HTTP2 bug)
 - Extremely small: 49.9kb gzipped in Chrome (first load; then 0 bytes refresh)
 - Route splitting
 - No opinions on state management: Add whatever you want if you don't want regular local state or Context
